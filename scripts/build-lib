@@ -1,0 +1,26 @@
+#!/bin/sh
+mkdir -p .buildlibs
+mkdir -p lib/lib
+mkdir -p lib/include
+
+cd .buildlibs
+
+echo "downloading..."
+wget https://github.com/libvips/libvips/archive/refs/tags/v8.18.0.zip
+
+echo "unzipping..."
+unzip v8.18.0.zip
+
+echo "building"
+cd libvips-8.18.0
+mkdir build
+cd build
+cmake -DBUILD_SHARED_LIBS ..
+cmake --build .
+
+cp lib/* ../../../lib/lib
+cd ..
+cp -R include/* ../../lib/include
+cd ../..
+
+make -C lib -j
