@@ -1,66 +1,30 @@
 import type { Maybe } from "Maybe"
 
+import type { Arrow, Point } from "@/Arrow"
+import type { Box, BoxRenderer, BoxStyle, BoxStyleVariant } from "@/Box"
+import type { Source } from "@/Source"
+
+import { CurvedArrow, CurvedPointedArrow, LinearArrow, PointedArrow } from "@/Arrow"
+import { BSColor, BSGhost, BSImage, BSSolid, Box, BoxStyleNone } from "@/Box"
 
 
-// top, left, width, height
-export type Box = Box(Float, Float, Float, Float)
 
-export alias BoxRenderer = Box -> String
+export Box
+export BSGhost
+export BSSolid
+export BSColor
+export BSImage
+export BoxStyleNone
 
-// ostensibly, images
-// export type Source = Source(String)
-export alias Source = String
-
-// maybe we wanna get more complicated later
-alias Color = String
-
-// nothing, solid, a color, or a picture
-export type BoxStyleVariant = BSGhost | BSSolid | BSColor(Color) | BSImage(Source)
-
-// bordered or custom bordered or with a background image
-export type BoxStyle
-  = BoxStyleNone
-  | BSBorder(BoxStyleVariant)
-  // just like css
-  // top right bottom left
-  | BSBorderImage(Maybe Source, Maybe Source, Maybe Source, Maybe Source)
-  // image background
-  | BSBackground(Source)
-
-
-export alias Point = #[Float, Float]
+export CurvedArrow
+export CurvedPointedArrow
+export LinearArrow
+export PointedArrow
 
 export type Arrow
-  // bubble to speaker
-  = PointedArrow(Point, Point, Point)
-  // bubble to bubble, directly
-  | LinearArrow(Point, Point, Point, Point)
-  // bubble to bubble, with style
-  | CurvedArrow(Point, Point, Point, Point, Point, Point)
-  // bubble to speaker, with style
-  | CurvedPointedArrow(Point, Point, Point, Point, Point)
-
-export type TextBox = TextBox(String, Box, BoxStyle, String)
-export type Bubble
-  = Bubble(Source, BoxStyle, String, Box, List Arrow)
-  | CustomBubble(BoxRenderer, String, Box, List Arrow)
-
-export type Frame
-  // name, bounding box, image, bubbles, text
-  = FrameWithText(String, Box, Source, List Bubble, List TextBox)
-  // name, bounding box, image
-  | Frame(String, Box, Source)
-
-export type Layer
-  // name, frames, bubbles, text
-  = LayerWithText(String, List Frame, List Bubble, List TextBox)
-  // name, frames
-  | Layer(String, List Frame)
-
-export type Page
-  // number, layers, bubbles, text
-  = PageWithText(Integer, List Layer, List Bubble, List TextBox)
-  // number, layers
-  | Page(Integer, List Layer)
-
-export type Book = Book(List Frame, List Layer, List Page)
+export type Point
+export type Source
+export type Box
+export type BoxRenderer
+export type BoxStyleVariant
+export type BoxStyle

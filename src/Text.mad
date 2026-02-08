@@ -1,0 +1,10 @@
+import type { Arrow } from "@/Arrow"
+import type { BoxAttributes, Rect, RectRenderer } from "@/Box"
+import type { Source } from "@/Source"
+
+
+
+export type TextBox = TextBox(String, Rect, BoxAttributes, String)
+export type Bubble
+  = Bubble(Source, BoxAttributes, String, Rect, List Arrow)
+  | CustomBubble(RectRenderer, String, Rect, List Arrow)

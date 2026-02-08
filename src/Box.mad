@@ -1,0 +1,60 @@
+import type { Maybe } from "Maybe"
+
+import type { Color } from "@/Color"
+import type { Source } from "@/Source"
+
+
+
+// top, left, width, height
+export type Rect = Rect(Float, Float, Float, Float)
+
+origin :: Rect -> #[Float, Float]
+export origin = where {
+  Rect(t, l, _, _) =>
+    #[t, l]
+}
+
+sizing :: Rect -> #[Float, Float]
+export sizing = where {
+  Rect(_, _, w, h) =>
+    #[w, h]
+}
+
+export alias RectRenderer = Rect -> String
+
+// nothing, solid, a color, or a picture
+export type BoxStyleVariant = BSGhost | BSSolid | BSColor(Color) | BSImage(Source)
+
+// bordered or custom bordered or with a background image
+export type BoxAttribute
+  = BoxStyleNone
+  | BSBorder(BoxStyleVariant)
+  // just like css
+  // top right bottom left
+  | BSBorderImage(Maybe Source, Maybe Source, Maybe Source, Maybe Source)
+  // image background
+  | BSBackground(Source)
+
+export alias BoxAttributes = List BoxAttribute
+
+export type Box = Box(Rect, List BoxAttribute)
+
+export rect = where {
+  Box(r, _) =>
+    r
+}
+
+export boxOrigin = pipe(
+  rect,
+  origin,
+)
+export boxSizing = pipe(
+  rect,
+  sizing,
+)
+
+attributes :: Box -> List BoxAttribute
+export attributes = where {
+  Box(_, attrs) =>
+    attrs
+}

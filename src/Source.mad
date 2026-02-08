@@ -1,0 +1,3 @@
+// ostensibly, images
+// export type Source = Source(String)
+export alias Source = String

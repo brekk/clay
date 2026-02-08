@@ -1,0 +1,37 @@
+import Math from "Math"
+
+
+
+// maybe we wanna get more complicated later
+export alias Point = #[Float, Float]
+
+export type Arrow
+  // bubble to speaker
+  = Arrow3(Point, Point, Point)
+  // bubble to bubble, directly
+  | Arrow4(Point, Point, Point, Point)
+  // bubble to speaker, with style
+  | Arrow5(Point, Point, Point, Point, Point)
+  // bubble to bubble, with style
+  | Arrow6(Point, Point, Point, Point, Point, Point)
+
+redirect :: Point -> Point -> Point
+export redirect = (a, b) => where(#[a, b]) {
+  #[#[h, i], #[m, n]] =>
+    #[Math.abs(h - m), Math.abs(i - n)]
+}
+
+simplify :: Arrow -> Arrow
+export simplify = where {
+  Arrow6(a, b, c, d, e, f) =>
+    Arrow5(a, b, c, d, redirect(e, f))
+
+  Arrow5(a, b, c, d, e) =>
+    Arrow4(a, b, c, d)
+
+  Arrow4(a, b, c, d) =>
+    Arrow3(a, b, redirect(c, d))
+
+  r =>
+    r
+}
