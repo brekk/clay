@@ -1,0 +1,10 @@
+import type { Layer } from "@/Layer"
+import type { Bubble, TextBox } from "@/Text"
+
+
+
+export type Page
+  // id, description, layers, bubbles, text
+  = Page(String, String, List Layer, List Bubble, List TextBox)
+
+export pageNoText = Page($, $, $, [], [])

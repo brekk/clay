@@ -1,10 +1,19 @@
 import type { Arrow } from "@/Arrow"
-import type { BoxAttributes, Rect, RectRenderer } from "@/Box"
+import type { Box, BoxAttributes, Rect, RectRenderer } from "@/Box"
 import type { Source } from "@/Source"
 
+import { Box, Rect } from "@/Box"
 
 
-export type TextBox = TextBox(String, Rect, BoxAttributes, String)
+
+// id, Box, message
+export type TextBox = TextBox(String, Box, String)
+
+export textBoxWithAttrs = (id, a, b, c, d, attrs) => TextBox(id, Box(Rect(a, b, c, d), attrs))
+
+export textBox = textBoxWithAttrs($, $, $, $, $, [])
+
+
 export type Bubble
   = Bubble(Source, BoxAttributes, String, Rect, List Arrow)
   | CustomBubble(RectRenderer, String, Rect, List Arrow)

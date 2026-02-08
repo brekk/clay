@@ -1,9 +1,48 @@
 import IO from "IO"
+import List from "List"
+import Random from "Random"
+
+import Arrow from "@/Arrow"
+import Box from "@/Box"
+import Color from "@/Color"
+import Content from "@/Content"
+import { uuid } from "@/Random"
+import Source from "@/Source"
+import Story from "@/Story"
 
 
 
 main = () => {
   pipe(
-    IO.pTrace("Main file for:"),
-  )("clay")
+    Content.seededString,
+    (maker) => maker
+      .textless
+      .page(
+        "home",
+        [
+          maker
+            .textless
+            .layer([
+              maker
+                .textless
+                .frame(
+                  "intro",
+                  Box.box(Box.Static(10), Box.Static(10), Box.Static(100), Box.Static(30)),
+                  "ref",
+                ),
+              maker
+                .textless
+                .frame(
+                  "second",
+                  Box.box(Box.Static(0), Box.Static(0), Box.Fraction(1, 1), Box.Static(30)),
+                  "ref",
+                ),
+            ]),
+        ],
+      ),
+    IO.pTrace("Comic books!"),
+  )("RAW")
+  // )(Content.pageNoText(0, "first page", [
+  // Content.layerNoText(
+  // ]))
 }

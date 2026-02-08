@@ -5,16 +5,27 @@ import type { Source } from "@/Source"
 
 
 
-// top, left, width, height
-export type Rect = Rect(Float, Float, Float, Float)
+export type FlexAxis = FlexRow | FlexColumn
+export type FlexFlow = FlexFlow | FlexFlowReverse
+export type FlexAlign = FlexSpaceAround | FlexCenter | FlexSpaceBetween | FlexStart | FlexEnd
 
-origin :: Rect -> #[Float, Float]
+export type Dimension
+  = Static(Float)
+  | Fraction(Float, Float)
+  | Flex(FlexAxis, FlexFlow, FlexAlign, FlexAlign)
+export alias DimPair = #[Dimension, Dimension]
+
+// top, left, width, height
+export type Rect = Rect(Dimension, Dimension, Dimension, Dimension)
+
+
+origin :: Rect -> DimPair
 export origin = where {
   Rect(t, l, _, _) =>
     #[t, l]
 }
 
-sizing :: Rect -> #[Float, Float]
+sizing :: Rect -> DimPair
 export sizing = where {
   Rect(_, _, w, h) =>
     #[w, h]
@@ -38,6 +49,7 @@ export type BoxAttribute
 export alias BoxAttributes = List BoxAttribute
 
 export type Box = Box(Rect, List BoxAttribute)
+export box = (a, b, c, d) => Box(Rect(a, b, c, d), [])
 
 export rect = where {
   Box(r, _) =>

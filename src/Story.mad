@@ -1,0 +1,14 @@
+export type Trait
+  = Enraged
+  | Irritated
+  | Confused
+  | Interested
+  | Delighted
+  | Disgusted
+  | Tired
+  | Neutral
+
+
+export type Behavior a = Behavior(String, Trait, a)
+
+export type Character a = Character(String, String, List (Behavior a))

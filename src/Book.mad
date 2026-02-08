@@ -1,0 +1,7 @@
+import type { Frame } from "@/Frame"
+import type { Layer } from "@/Layer"
+import type { Page } from "@/Page"
+
+
+
+export type Book = Book(List Frame, List Layer, List Page)

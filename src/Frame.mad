@@ -1,0 +1,13 @@
+import type { Box } from "@/Box"
+import type { Source } from "@/Source"
+import type { Bubble, TextBox } from "@/Text"
+
+import { Box } from "@/Box"
+
+
+
+export type Frame
+  // id, name, bounding box, image, bubbles, text
+  = Frame(String, String, Box, Source, List Bubble, List TextBox)
+
+export frameNoText = Frame($, $, $, $, [], [])

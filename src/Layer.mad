@@ -1,0 +1,10 @@
+import type { Frame } from "@/Frame"
+import type { Bubble, TextBox } from "@/Text"
+
+
+
+export type Layer
+  // id, frames, bubbles, text
+  = Layer(String, List Frame, List Bubble, List TextBox)
+
+export layerNoText = Layer($, $, [], [])

@@ -1,27 +1,33 @@
-import type { Box } from "@/Box"
-import type { Source } from "@/Source"
-import type { Bubble, TextBox } from "@/Text"
+import Random from "Random"
 
-import { Box } from "@/Box"
+import { Frame } from "@/Frame"
+import { Layer } from "@/Layer"
+import { Page } from "@/Page"
+import { uuid } from "@/Random"
+import { textBoxWithAttrs } from "@/Text"
 
 
 
-export type Frame
-  // name, bounding box, image, bubbles, text
-  = FrameWithText(String, Box, Source, List Bubble, List TextBox)
-  // name, bounding box, image
-  | Frame(String, Box, Source)
+export seeded = (random) => {
+  seededPage = (d, l, b, t) => Page(uuid(random), d, l, b, t)
+  seededFrame = (n, bb, i, b, t) => Frame(uuid(random), n, bb, i, b, t)
+  seededLayer = (f, b, t) => Layer(uuid(random), f, b, t)
+  pack = (a, b, c, d, attrs) => textBoxWithAttrs(uuid(random), a, b, c, d, attrs)
+  return {
+    page: seededPage,
+    frame: seededFrame,
+    layer: seededLayer,
+    pack,
+    box: pack($, $, $, $, []),
+    textless: {
+      page: seededPage($, $, [], []),
+      frame: seededFrame($, $, $, [], []),
+      layer: seededLayer($, [], []),
+    },
+  }
+}
 
-export type Layer
-  // name, frames, bubbles, text
-  = LayerWithText(String, List Frame, List Bubble, List TextBox)
-  // name, frames
-  | Layer(String, List Frame)
-
-export type Page
-  // number, layers, bubbles, text
-  = PageWithText(Integer, List Layer, List Bubble, List TextBox)
-  // number, layers
-  | Page(Integer, List Layer)
-
-export type Book = Book(List Frame, List Layer, List Page)
+export seededString = pipe(
+  Random.generateFromString,
+  seeded,
+)
